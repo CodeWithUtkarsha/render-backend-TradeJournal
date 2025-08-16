@@ -43,6 +43,24 @@ const tradeSchema = new mongoose.Schema({
     min: [0.001, 'Quantity must be positive']
   },
   
+  // Forex-specific fields
+  lotType: {
+    type: String,
+    enum: {
+      values: ['standard', 'mini', 'micro', 'nano'],
+      message: 'Lot type must be standard, mini, micro, or nano'
+    },
+    default: 'micro'
+  },
+  pips: {
+    type: Number,
+    default: null
+  },
+  returnPercent: {
+    type: Number,
+    default: null
+  },
+  
   // Risk Management
   stopLoss: {
     type: Number,
