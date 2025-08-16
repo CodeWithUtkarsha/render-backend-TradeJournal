@@ -84,6 +84,10 @@ const validateCreateTrade = [
   body('quantity')
     .isFloat({ min: 0.01 })
     .withMessage('Quantity must be a positive number'),
+  body('lotType')
+    .optional()
+    .isIn(['standard', 'mini', 'micro', 'nano'])
+    .withMessage('Lot type must be standard, mini, micro, or nano'),
   body('entryPrice')
     .isFloat({ min: 0.01 })
     .withMessage('Entry price must be a positive number'),
@@ -91,13 +95,30 @@ const validateCreateTrade = [
     .optional()
     .isFloat({ min: 0.01 })
     .withMessage('Exit price must be a positive number'),
+  body('pips')
+    .optional()
+    .isFloat()
+    .withMessage('Pips must be a valid number'),
+  body('returnPercent')
+    .optional()
+    .isFloat()
+    .withMessage('Return percent must be a valid number'),
   body('entryDate')
+    .optional()
     .isISO8601()
     .withMessage('Entry date must be a valid date'),
+  body('entryTime')
+    .optional()
+    .isISO8601()
+    .withMessage('Entry time must be a valid date'),
   body('exitDate')
     .optional()
     .isISO8601()
     .withMessage('Exit date must be a valid date'),
+  body('exitTime')
+    .optional()
+    .isISO8601()
+    .withMessage('Exit time must be a valid date'),
   body('stopLoss')
     .optional()
     .isFloat({ min: 0.01 })
@@ -133,6 +154,14 @@ const validateCreateTrade = [
     .trim()
     .isLength({ max: 1000 })
     .withMessage('Notes must not exceed 1000 characters'),
+  body('mood')
+    .optional()
+    .isInt({ min: 1, max: 5 })
+    .withMessage('Mood must be between 1 and 5'),
+  body('tags')
+    .optional()
+    .isArray()
+    .withMessage('Tags must be an array'),
   body('status')
     .optional()
     .isIn(['open', 'closed', 'cancelled'])
