@@ -89,12 +89,12 @@ const validateCreateTrade = [
     .isIn(['standard', 'mini', 'micro', 'nano'])
     .withMessage('Lot type must be standard, mini, micro, or nano'),
   body('entryPrice')
-    .isFloat({ min: 0.01 })
-    .withMessage('Entry price must be a positive number'),
+    .isFloat({ min: 0.00001 })
+    .withMessage('Entry price must be a positive number (minimum 0.00001)'),
   body('exitPrice')
     .optional()
-    .isFloat({ min: 0.01 })
-    .withMessage('Exit price must be a positive number'),
+    .isFloat({ min: 0.00001 })
+    .withMessage('Exit price must be a positive number (minimum 0.00001)'),
   body('pips')
     .optional()
     .isFloat()
@@ -121,12 +121,12 @@ const validateCreateTrade = [
     .withMessage('Exit time must be a valid date'),
   body('stopLoss')
     .optional()
-    .isFloat({ min: 0.01 })
-    .withMessage('Stop loss must be a positive number'),
+    .isFloat({ min: 0.00001 })
+    .withMessage('Stop loss must be a positive number (minimum 0.00001)'),
   body('takeProfit')
     .optional()
-    .isFloat({ min: 0.01 })
-    .withMessage('Take profit must be a positive number'),
+    .isFloat({ min: 0.00001 })
+    .withMessage('Take profit must be a positive number (minimum 0.00001)'),
   body('commission')
     .optional()
     .isFloat({ min: 0 })
